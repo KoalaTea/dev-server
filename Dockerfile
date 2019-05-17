@@ -1,29 +1,23 @@
-FROM python:3.7-alpine3.9 as python
+FROM python:3.7 as python
 
-FROM golang:1.12.0-alpine3.9 as golang
+FROM golang:1.12.0 as golang
 
-FROM alpine:3.9
+FROM codercom/code-server
 
-
+USER root
 COPY --from=python /usr/local/ /usr/local/
 COPY --from=golang /usr/local/ /usr/local/
+RUN apt-get update && apt-get install -y ca-certificates \
+	git \
+	bash \
+	libunwind8
 
-RUN apk add --no-cache ca-certificates \
-    git \
-    bash \
-    libffi-dev \
-    openssl-dev \
-    bzip2-dev \
-    zlib-dev \
-    readline-dev \
-    sqlite-dev \
-    build-base \
-    linux-headers
+#COPY --from=python /lib/ /lib/
+
 
 ENV PATH /usr/local/go/bin:$PATH
 ENV GO111MODULE auto
 ENV GOPATH /go
-RUN mkdir -p "/go" && mkdir -p "$GOPATH/src" "$GOPATH/bin" "$GOPATH/pkg" && chmod -R 777 "$GOPATH"
+#RUN mkdir -p "/go" && mkdir -p "$GOPATH/src" "$GOPATH/bin" "$GOPATH/pkg" && chmod -R 777 "$GOPATH"
 
-
-CMD ["/bin/ash"]
+ENTRYPOINT ["dumb-init", "code-server"]
