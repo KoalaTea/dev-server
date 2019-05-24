@@ -22,6 +22,6 @@ ENV GOPATH /go
 RUN code-server --install-extension ms-python.python && \
 	code-server --install-extension ms-vscode.go
 
-COPY vscode,json /home/coder/.config/Code/User/settings.json
+COPY vscode.json /home/coder/.config/Code/User/settings.json
 
 ENTRYPOINT ["dumb-init", "code-server"]
