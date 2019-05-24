@@ -12,12 +12,16 @@ RUN apt-get update && apt-get install -y ca-certificates \
 	bash \
 	libunwind8
 
-#COPY --from=python /lib/ /lib/
-
+RUN mkdir -p "/go" && mkdir -p "/go/src" "/go/bin" "/go/pkg" && chmod -R 777 "/go"
+USER coder
 
 ENV PATH /usr/local/go/bin:$PATH
 ENV GO111MODULE auto
 ENV GOPATH /go
-#RUN mkdir -p "/go" && mkdir -p "$GOPATH/src" "$GOPATH/bin" "$GOPATH/pkg" && chmod -R 777 "$GOPATH"
+
+RUN code-server --install-extension ms-python.python && \
+	code-server --install-extension ms-vscode.go
+
+COPY vscode,json /home/coder/.config/Code/User/settings.json
 
 ENTRYPOINT ["dumb-init", "code-server"]

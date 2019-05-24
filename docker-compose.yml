@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  dev:
+    build: .
+    ports:
+      - "127.0.0.1:8443:8443"
+    volumes:
+      - dev-projects:/home/coder/project
+
+volumes:
+  dev-projects:
