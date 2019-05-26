@@ -2,11 +2,14 @@ FROM python:3.7 as python
 
 FROM golang:1.12.0 as golang
 
+FROM node:12.3.1 as node
+
 FROM codercom/code-server
 
 USER root
 COPY --from=python /usr/local/ /usr/local/
 COPY --from=golang /usr/local/ /usr/local/
+COPY --from=node /usr/local/ /usr/local
 RUN apt-get update && apt-get install -y ca-certificates \
 	git \
 	bash \
