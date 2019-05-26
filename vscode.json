@@ -1,8 +1,27 @@
 {
-    "python.linting.mypyEnabled": true,
+    "window.zoomLevel": 1,
     "editor.formatOnSave": true,
-    "python.formatting.provider": "black",
     "editor.rulers": [
         100
-    ]
+    ],
+    "python.linting.mypyEnabled": true,
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "100"
+    ],
+    "python.unitTest.pyTestArgs": [
+        "tests",
+    ],
+    "python.unitTest.unittestEnabled": false,
+    "python.unitTest.nosetestsEnabled": false,
+    "python.unitTest.pyTestEnabled": true,
+    "coverage-gutters.showLineCoverage": true,
+    "search.useRipgrep": false,
+    "file.associations": {
+        "*.pylintrc": "ini",
+        "Dockerfile-*": "dockerfile",
+    },
+    "eslint.autoFixOnSave": true,
+    "javascipt.format.exnable": false,
 }
