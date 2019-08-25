@@ -26,7 +26,8 @@ RUN code-server --install-extension ms-python.python && \
 	code-server --install-extension ms-vscode.go && \
 	code-server --install-extension ryanluker.vscode-coverage-gutters && \
 	code-server --install-extension peterjausovec.vscode-docker && \
-	code-server --install-extension dbaeumer.vscode-eslint
+	code-server --install-extension dbaeumer.vscode-eslint && \
+	code-server --install-extension esbenp.prettier-vscode
 
 COPY vscode.json /home/coder/.local/share/code-server/User/settings.json
 #COPY vscode.json /home/coder/.config/Code/User/settings.json
